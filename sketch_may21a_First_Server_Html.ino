@@ -3,7 +3,7 @@
 #include<ESP8266WebServer.h>      //Library to generate response for client requests
 
 String ssid= "vivo 1714";
-String password = "";
+String password = "";      //password here if password is None then write like this
 
 ESP8266WebServer server(80); //Creating an object of server hosted at 80 i.e. HTTP.
 
