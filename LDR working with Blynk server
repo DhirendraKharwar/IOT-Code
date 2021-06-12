@@ -1,0 +1,48 @@
+#define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+//#include <SimpleTimer.h>   //including the library of SimpleTimer
+
+BlynkTimer timer;
+
+int LDR = A0;
+
+char auth[] = "X9Iwhrz3HyBEP2TGuNVVPXgPG0YzeJox";            // You should get Auth Token on email from Blynk app.
+                                                               // OR Go to the Project Settings in blynk app (nut icon).
+
+char ssid[] = "DDDDESKTOP";    // Your WiFi credentials.
+char pass[] = "90768461211";  // Set password to "" for open networks.
+
+void setup()
+{
+    pinMode(5,OUTPUT);
+    Serial.begin(9600);// Debug console
+    Blynk.begin(auth, ssid, pass);
+    timer.setInterval(2000, talentbattle);
+  
+    
+}
+
+void talentbattle()
+{
+  
+  int val = analogRead(A0);
+  if(val <=940)
+  {
+    digitalWrite(5,HIGH);
+    }
+   else
+   {
+    digitalWrite(5,LOW);
+    }
+  Serial.print("LDR Val = ");
+  Serial.println(val); 
+  
+  Blynk.virtualWrite(V0, val);
+}
+
+void loop()
+{ 
+  Blynk.run();
+  //timer.run();
+}
